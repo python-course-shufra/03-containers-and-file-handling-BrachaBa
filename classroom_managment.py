@@ -67,7 +67,7 @@ def add_grade(name, profession, grade):
     """Adds a new grade to the student grades"""
     for student in classroom:
         if student['name'] == name:
-            student['grades'].append((profession), (grade))
+            student['grades'].append((profession, grade))
     pass
 
 
@@ -78,7 +78,7 @@ def avg_grade(name, profession):
     for student in classroom:
         if student['name'] == name:
             grades = [g[1] for g in student['grades'] if g[0] == profession]
-            return sum(grades) / len(grades)
+            return sum(grades) / len(grades) if grades else None
     pass
 
 
