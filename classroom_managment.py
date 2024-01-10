@@ -42,21 +42,32 @@ def add_student(name, email=None):
              in lowercase, you can use the `s.lower()` method
     'grade': initialize with empty list
     """
+    if email is None:
+        email = f'{name.lower()}@example.com'
+    classroom.append({'name': name, 'email': email, 'grades': []})
     pass
 
 
 def delete_student(name):
     """Delete a student from the classroom"""
+    global classroom
+    classroom = [student for student in classroom if student['name'] != name]
     pass
 
 
 def set_email(name, email):
     """Sets the email of the student"""
+    for student in classroom:
+        if student['name'] == name:
+            student['email'] = email
     pass
 
 
 def add_grade(name, profession, grade):
     """Adds a new grade to the student grades"""
+    for student in classroom:
+        if student['name'] == name:
+            student['grades'].append((profession), (grade))
     pass
 
 
@@ -64,9 +75,17 @@ def avg_grade(name, profession):
     """Returns the average of grades of the student
     in the specified profession
     """
+    for student in classroom:
+        if student['name'] == name:
+            grades = [g[1] for g in student['grades'] if g[0] == profession]
+            return sum(grades) / len(grades)
     pass
 
 
 def get_professions(name):
     """Returns a list of unique professions that student has grades in"""
+    for student in classroom:
+        if student['name'] == name:
+            return list(set(g[0] for g in student['grades']))
+        return []
     pass
